@@ -12,13 +12,28 @@ const server = http.createServer((req, res) => {
         filePath = './index.html';
     }
     
+    // Get file extension
+    const extname = path.extname(filePath);
+    
+    // Set content type based on file extension
+    let contentType = 'text/html';
+    if (extname === '.css') {
+        contentType = 'text/css';
+    } else if (extname === '.js') {
+        contentType = 'text/javascript';
+    } else if (extname === '.jpg' || extname === '.jpeg') {
+        contentType = 'image/jpeg';
+    } else if (extname === '.png') {
+        contentType = 'image/png';
+    }
+    
     // Read and serve the file
     fs.readFile(filePath, (err, content) => {
         if (err) {
             res.writeHead(404);
-            res.end('File not found');
+            res.end('File not found: ' + filePath);
         } else {
-            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.writeHead(200, { 'Content-Type': contentType });
             res.end(content);
         }
     });
