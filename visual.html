@@ -3,121 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Visual - Maungaraki Lime</title>
+    <title>Soil Improvement Visual - Agricultural Lime</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="visual.css">
 </head>
 <body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="theme-toggle">
+        <span class="theme-icon">🌙</span>
+        <span class="theme-text">Dark Mode</span>
+    </button>
+
+    <!-- NAVIGATION -->
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="visual.html" class="active">Interactive Visual</a></li>
+            <li><a href="visual.html" class="active">Soil Visual</a></li>
             <li><a href="about.html">About</a></li>
         </ul>
     </nav>
 
-    <div class="content">
-        <div class="container">
-            <h1>Interactive Soil Visualization</h1>
-            <h2>Watch Soil Transform with Lime Treatment</h2>
-            
-            <!-- Main soil container for interactive features -->
-            <div id="soilContainer" class="soil-container">
-                <div class="stage-info">
-                    <h3>5-Stage Soil Transformation Process</h3>
-                    <p>See how Maungaraki Lime transforms acidic soil into healthy, productive earth</p>
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <h1>Interactive Soil Improvement Demo</h1>
+        <p>See how applying agricultural lime changes soil pH, nutrient availability, and crop growth.</p>
+
+        <!-- INTERACTIVE SOIL DEMO -->
+        <div class="soil-demo">
+            <h2>Soil Health Improvement</h2>
+
+            <!-- Soil Visual -->
+            <div class="soil-cross-section">
+                <!-- pH and Nutrients -->
+                <div class="ph-display">pH: 5.5</div>
+                <div class="nutrient-indicator">
+                    <span class="nutrient nitrogen">Nitrogen: Low</span>
+                    <span class="nutrient phosphorus">Phosphorus: Low</span>
+                    <span class="nutrient potassium">Potassium: Low</span>
                 </div>
-                
-                <!-- Soil stages preview - will become interactive in next commits -->
-                <div class="stages-preview">
-                    <div class="stage" id="stage1">
-                        <h4>Stage 1</h4>
-                        <p>Poor acidic soil (pH 4.5)</p>
-                    </div>
-                    <div class="stage" id="stage2">
-                        <h4>Stage 2</h4>
-                        <p>Lime application begins</p>
-                    </div>
-                    <div class="stage" id="stage3">
-                        <h4>Stage 3</h4>
-                        <p>pH starts balancing (pH 5.5)</p>
-                    </div>
-                    <div class="stage" id="stage4">
-                        <h4>Stage 4</h4>
-                        <p>Enhanced nutrients (pH 6.2)</p>
-                    </div>
-                    <div class="stage" id="stage5">
-                        <h4>Stage 5</h4>
-                        <p>Healthy soil (pH 6.8)</p>
-                    </div>
-                </div>
-                
-                <!-- Interactive Controls -->
-                <div class="controls">
-                    <button id="nextStageBtn" onclick="nextStage()">Next Stage →</button>
-                    <button id="resetBtn" onclick="resetStages()">Reset</button>
-                    <p class="stage-indicator">Current Stage: <span id="currentStage">1</span></p>
+
+                <!-- Grass and Soil Layers -->
+                <div class="grass-layer"></div>
+                <div class="plants"></div>
+                <div class="topsoil-layer"></div>
+                <div class="subsoil-layer"></div>
+
+                <!-- Soil particle animation -->
+                <div class="soil-particles"></div>
+
+                <!-- Lime Particles -->
+                <div class="lime-particles"></div>
+
+                <!-- Yield Meter -->
+                <div class="yield-meter">
+                    <div class="yield-label">Yield</div>
+                    <div class="yield-bar"><div class="yield-fill"></div></div>
+                    <div class="yield-percent">30%</div>
                 </div>
             </div>
-            
-            <div class="explanation">
-                <h3>Understanding the Process</h3>
-                <p>This interactive visualization will show you exactly how lime application transforms soil over time. Each stage represents weeks to months of natural soil improvement.</p>
+
+            <!-- Stage Controls -->
+            <div class="controls">
+                <button class="stage-btn" data-stage="1">Stage 1<br><small>Acidic Soil</small></button>
+                <button class="stage-btn" data-stage="2">Stage 2<br><small>Lime Applied</small></button>
+                <button class="stage-btn" data-stage="3">Stage 3<br><small>Healthy Growth</small></button>
             </div>
+
+            <!-- Stage Information -->
+            <div class="stage-info">
+                <h3>Stage Info</h3>
+                <p>Click a stage to see how lime affects soil health and plant growth.</p>
+            </div>
+        </div>
+
+        <!-- Explanation section -->
+        <div class="explanation">
+            <h3>Why Agricultural Lime Works</h3>
+            <p>Lime raises soil pH, unlocking nutrients like nitrogen, phosphorus, and potassium. This helps plants grow stronger, improves root systems, and increases yield.</p>
         </div>
     </div>
 
+    <!-- FOOTER -->
     <footer>
-        <p>&copy; 2025 Maungaraki Lime - Commit #5: Added interactive button with JS</p>
+        <p>&copy; 2025 Maungaraki Lime | Soil Improvement Experts</p>
     </footer>
 
+    <!-- JavaScript for interactivity -->
+    <script src="visual.js"></script>
     <script>
-        // Current stage tracker
-        let currentStageNum = 1;
-        const maxStages = 5;
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('.theme-icon');
+        const themeText = themeToggle.querySelector('.theme-text');
 
-        // Function to go to next stage
-        function nextStage() {
-            if (currentStageNum < maxStages) {
-                // Remove active class from current stage
-                document.getElementById(`stage${currentStageNum}`).classList.remove('active');
-                
-                // Move to next stage
-                currentStageNum++;
-                
-                // Add active class to new stage
-                document.getElementById(`stage${currentStageNum}`).classList.add('active');
-                
-                // Update stage indicator
-                document.getElementById('currentStage').textContent = currentStageNum;
-                
-                // Disable button if we've reached the last stage
-                if (currentStageNum >= maxStages) {
-                    document.getElementById('nextStageBtn').disabled = true;
-                    document.getElementById('nextStageBtn').textContent = 'Complete!';
-                }
+        // Check for saved theme preference or default to 'light'
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+
+        // Update button text based on current theme
+        function updateThemeButton(theme) {
+            if (theme === 'dark') {
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark Mode';
             }
         }
 
-        // Function to reset to stage 1
-        function resetStages() {
-            // Remove active class from all stages
-            for (let i = 1; i <= maxStages; i++) {
-                document.getElementById(`stage${i}`).classList.remove('active');
-            }
-            
-            // Reset to stage 1
-            currentStageNum = 1;
-            document.getElementById(`stage${currentStageNum}`).classList.add('active');
-            document.getElementById('currentStage').textContent = currentStageNum;
-            
-            // Re-enable next button
-            document.getElementById('nextStageBtn').disabled = false;
-            document.getElementById('nextStageBtn').textContent = 'Next Stage →';
-        }
+        // Initialize button state
+        updateThemeButton(currentTheme);
 
-        // Initialize - set stage 1 when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('stage1').classList.add('active');
+        // Theme toggle event listener
+        themeToggle.addEventListener('click', function() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeButton(newTheme);
         });
     </script>
 </body>
